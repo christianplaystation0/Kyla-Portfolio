@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Big Dumper & Friends — Influencer Campaign</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-zinc-100">
+  <main class="max-w-6xl mx-auto px-6 py-12 md:py-16">
+    <!-- Title -->
+    <h1 class="text-3xl md:text-5xl font-semibold text-zinc-900">
+      Big Dumper & Friends – Influencer Campaign
+    </h1>
+
+    <!-- Intro + Large media -->
+    <div class="mt-8 grid grid-cols-1 md:grid-cols-12 gap-8">
+      <!-- Left: paragraph -->
+      <div class="md:col-span-6">
+        <p class="text-lg leading-relaxed text-zinc-800">
+          This campaign… (replace with your copy). Keep ~3–6 lines for balance.
+          Talk about goals, audience, channels, and outcome.
+        </p>
+      </div>
+
+      <!-- Right: large rounded media placeholder -->
+      <div class="md:col-span-6">
+        <div class="w-full aspect-[16/9] overflow-hidden bg-black">
+          <video
+            src="../assets/js/big_dumper_and_friends_-_pilot (1080p) (1).mp4"
+            class="w-full h-full object-cover"
+            playsinline
+            id="hero-video"
+            loop
+            preload="metadata"
+          ></video>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom row: paged tiles (4 first, then 2) -->
+    <div class="relative mt-10" id="paged-tiles">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6" id="tiles-grid"></div>
+      <!-- Left arrow (only after you go forward) -->
+      <button
+        aria-label="Previous"
+        id="prev-btn"
+        class="hidden absolute left-[-8px] top-1/2 -translate-y-1/2 rounded-full bg-white/90 shadow px-3 py-2 hover:bg-white transition md:left-[-18px]"
+      >
+        ←
+      </button>
+      <!-- Right arrow (only if there are more items) -->
+      <button
+        aria-label="Next"
+        id="next-btn"
+        class="absolute right-[-8px] top-1/2 -translate-y-1/2 rounded-full bg-white/90 shadow px-3 py-2 hover:bg-white transition md:right-[-18px]"
+      >
+        →
+      </button>
+    </div>
+
+    <!-- Back link -->
+    <div class="mt-10">
+      <a href="../index.html#case-studies" class="text-sm underline underline-offset-4 hover:no-underline">
+        ← Back to Case Studies
+      </a>
+    </div>
+  </main>
+  <script>
+    (function() {
+      // Six placeholder items; replace with real content as needed
+      const CASE_TILES = Array.from({ length: 6 }).map((_, i) => ({ id: i + 1 }));
+      const STEP = 2;           // move by 2 each click
+      const VISIBLE = 4;        // always show 4 tiles
+      let start = 0;            // index of the first visible tile
+
+      const grid = document.getElementById('tiles-grid');
+      const prevBtn = document.getElementById('prev-btn');
+      const nextBtn = document.getElementById('next-btn');
+
+      function renderTile(tile) {
+        const el = document.createElement('div');
+        // straight corners, 16:9 box
+        el.className = 'aspect-[16/9] bg-zinc-400 relative overflow-hidden';
+
+        if (tile.id === 1) {
+          // First smaller placeholder becomes a video with same play settings as the big one
+          const vid = document.createElement('video');
+          vid.src = '../assets/images/The%20Good,%20the%20Bad,%20and%20the%20Dumper.mp4';
+          vid.setAttribute('poster', '../assets/images/Screen%20Shot%202025-10-26%20at%2011.00.26%20PM.jpeg');
+          vid.className = 'absolute inset-0 w-full h-full object-cover';
+          vid.setAttribute('playsinline', '');
+          vid.setAttribute('controls', '');
+          vid.setAttribute('loop', '');
+          vid.setAttribute('preload', 'metadata');
+          // Use darker bg behind video
+          el.className = 'aspect-[16/9] bg-black relative overflow-hidden';
+          el.appendChild(vid);
+        } else if (tile.id === 2) {
+          // Second placeholder becomes Thanksgiving video with same settings
+          const vid = document.createElement('video');
+          vid.src = '../assets/images/Thanksgiving.mp4';
+          vid.setAttribute('poster', '../assets/images/Screen%20Shot%202025-10-26%20at%2011.03.04%20PM.jpeg');
+          vid.className = 'absolute inset-0 w-full h-full object-cover';
+          vid.setAttribute('playsinline', '');
+          vid.setAttribute('controls', '');
+          vid.setAttribute('loop', '');
+          vid.setAttribute('preload', 'metadata');
+          el.className = 'aspect-[16/9] bg-black relative overflow-hidden';
+          el.appendChild(vid);
+        } else if (tile.id === 3) {
+          // Third placeholder becomes Holiday video with same settings
+          const vid = document.createElement('video');
+          vid.src = '../assets/images/Holiday.mp4';
+          vid.setAttribute('poster', '../assets/images/Screen%20Shot%202025-10-26%20at%2011.11.33%20PM.jpeg');
+          vid.className = 'absolute inset-0 w-full h-full object-cover';
+          vid.setAttribute('playsinline', '');
+          vid.setAttribute('controls', '');
+          vid.setAttribute('loop', '');
+          vid.setAttribute('preload', 'metadata');
+          el.className = 'aspect-[16/9] bg-black relative overflow-hidden';
+          el.appendChild(vid);
+        } else if (tile.id === 4) {
+          // Fourth placeholder becomes Bathroom Idol video with same settings
+          const vid = document.createElement('video');
+          vid.src = '../assets/images/Bathroom%20Idol.mp4';
+          vid.setAttribute('poster', '../assets/images/Screen%20Shot%202025-10-26%20at%2011.13.03%20PM.jpeg');
+          vid.className = 'absolute inset-0 w-full h-full object-cover';
+          vid.setAttribute('playsinline', '');
+          vid.setAttribute('controls', '');
+          vid.setAttribute('loop', '');
+          vid.setAttribute('preload', 'metadata');
+          el.className = 'aspect-[16/9] bg-black relative overflow-hidden';
+          el.appendChild(vid);
+        } else if (tile.id === 5) {
+          // Fifth placeholder becomes Diver video with same settings
+          const vid = document.createElement('video');
+          vid.src = '../assets/images/Diver.mp4';
+          vid.setAttribute('poster', '../assets/images/Screen%20Shot%202025-10-26%20at%2011.14.00%20PM.jpeg');
+          vid.className = 'absolute inset-0 w-full h-full object-cover';
+          vid.setAttribute('playsinline', '');
+          vid.setAttribute('controls', '');
+          vid.setAttribute('loop', '');
+          vid.setAttribute('preload', 'metadata');
+          el.className = 'aspect-[16/9] bg-black relative overflow-hidden';
+          el.appendChild(vid);
+        } else if (tile.id === 6) {
+          // Sixth placeholder becomes DannyDrainzit video with same settings
+          const vid = document.createElement('video');
+          vid.src = '../assets/images/DannyDrainzit.mp4';
+          vid.setAttribute('poster', '../assets/images/Screen%20Shot%202025-10-26%20at%2011.15.09%20PM.jpeg');
+          vid.className = 'absolute inset-0 w-full h-full object-cover';
+          vid.setAttribute('playsinline', '');
+          vid.setAttribute('controls', '');
+          vid.setAttribute('loop', '');
+          vid.setAttribute('preload', 'metadata');
+          el.className = 'aspect-[16/9] bg-black relative overflow-hidden';
+          el.appendChild(vid);
+        }
+
+        return el;
+      }
+
+      function updateUI() {
+        const maxStart = Math.max(0, CASE_TILES.length - VISIBLE);
+        const clampedStart = Math.min(start, maxStart);
+        start = clampedStart;
+        const visible = CASE_TILES.slice(clampedStart, clampedStart + VISIBLE);
+
+        grid.innerHTML = '';
+        visible.forEach((t) => grid.appendChild(renderTile(t)));
+
+        // Pad with placeholders if fewer than 4 items remain
+        const remaining = Math.max(0, VISIBLE - visible.length);
+        for (let i = 0; i < remaining; i++) {
+          const ph = document.createElement('div');
+          ph.className = 'aspect-[16/9] bg-zinc-200';
+          grid.appendChild(ph);
+        }
+
+        if (window.__applyHoverControls) window.__applyHoverControls();
+
+        const canPrev = clampedStart > 0;
+        const canNext = clampedStart < maxStart;
+        prevBtn.classList.toggle('hidden', !canPrev);
+        nextBtn.classList.toggle('hidden', !canNext);
+      }
+
+      prevBtn.addEventListener('click', function() {
+        start = Math.max(0, start - STEP);
+        updateUI();
+      });
+
+      nextBtn.addEventListener('click', function() {
+        const maxStart = Math.max(0, CASE_TILES.length - VISIBLE);
+        start = Math.min(maxStart, start + STEP);
+        updateUI();
+      });
+
+      // Optional keyboard access
+      window.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowRight' && !nextBtn.classList.contains('hidden')) nextBtn.click();
+        if (e.key === 'ArrowLeft' && !prevBtn.classList.contains('hidden')) prevBtn.click();
+      });
+
+      updateUI();
+    })();
+
+    // Hover-controls for all videos; always-on controls for touch devices
+    (function() {
+      var supportsHover = window.matchMedia && window.matchMedia('(hover: hover)').matches;
+      window.__attachHoverControls = function(video) {
+        if (!video || video.dataset.hc === '1') return;
+        if (supportsHover) {
+          try { video.controls = false; } catch(_) {}
+          video.addEventListener('mouseenter', function() { try { video.controls = true; } catch(_) {} });
+          video.addEventListener('mouseleave', function() { try { video.controls = false; } catch(_) {} });
+          video.addEventListener('focus', function() { try { video.controls = true; } catch(_) {} });
+          video.addEventListener('blur', function() { try { video.controls = false; } catch(_) {} });
+        } else {
+          try { video.controls = true; } catch(_) {}
+        }
+        video.dataset.hc = '1';
+      };
+      window.__applyHoverControls = function() {
+        document.querySelectorAll('video').forEach(function(v){ window.__attachHoverControls(v); });
+      };
+      window.__applyHoverControls();
+    })();
+  </script>
+</body>
+</html>
+
+
